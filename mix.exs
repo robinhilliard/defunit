@@ -1,8 +1,8 @@
-defmodule Units.Mixfile do
+defmodule DefUnit.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :units,
+    [app: :defunit,
      version: "0.1.0",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
@@ -37,10 +37,16 @@ defmodule Units.Mixfile do
   
   defp package do
     [
-      files: ["lib", "mix.exs", "README", "LICENSE*"],
+      files: ["lib", "mix.exs", "README.md", "LICENSE*"],
       maintainers: ["Robin Hilliard"],
       licenses: ["Apache 2.0"],
-      links: %{"GitHub" => "https://github.com/robinhilliard/units.git"}
+      links: %{"GitHub" => "https://github.com/robinhilliard/defunit.git"},
+      description: """
+      DefUnit provides a pair of macros that allow you to quickly create a module that
+      defines a set of core units for its users to work with. The macros
+      create documentation attributes, conversion operators and type specs that allow
+      Dialyzer to detect most incompatible assignments at compile time.
+      """
     ]
   end
 end
