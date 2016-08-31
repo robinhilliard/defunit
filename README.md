@@ -5,7 +5,7 @@ defines a set of core units for its users to work with. The macros
 create documentation attributes, conversion operators and type specs that allow
 Dialyzer to detect most incompatible assignments at compile time.
 
-Units adds almost no run-time overhead to your code. The values you work with
+DefUnit adds almost no run-time overhead to your code. The values you work with
 are everyday floats.
 
 #### Example
