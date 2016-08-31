@@ -148,7 +148,7 @@ piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> 
 ```
 
 nothing will happen... unless you run Dialyzer*, in which case you'll
-get this response:
+get a response similar to this:
 
 ```
 $ mix dialyzer
