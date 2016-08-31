@@ -156,12 +156,18 @@ piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> 
 If you mistakenly write:
 
 ```elixir
+piper_archer_stall_speed_kts = vs(1157 <~ :knots, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :knots
+```
+
+or perhaps:
+
+```elixir
 piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :kg
 ```
 
 you will get a dud result. However if you run Dialyzer (the
 [dialyxir](https://hex.pm/packages/dialyxir) mix plugin is easy to set up and
-use) you'll get a warning similar to this:
+use) you'll get warnings similar to this:
 
 ```
 $ mix dialyzer
@@ -177,3 +183,30 @@ contract is
  done in 0m1.36s
 done (warnings were emitted)
 ```
+
+[LYSE](http://learnyousomeerlang.com/dialyzer) has a good explanation of Dialyzer, its
+history, intent, and what the various warnings mean.
+
+#### More About the Macros
+
+If your 'other' unit refers to an undefined 'core' unit you will get a compile error:
+
+```
+== Compilation error on file test/support/def_unit_example.ex ==
+** (ArgumentError) Unit 'kmh' refers to unknown core unit 'speeding_bullet'
+```
+
+If your conversion between units is more complex (e.g. Farhrenheit to Celcius or live currency
+exchange rates) you can replace the conversion ratio in the other macro with a 2-tuple of 
+from/to conversion functions:
+
+```elixir
+  DefUnit.core  "C", :c, "Temperature in Celcius"
+  DefUnit.other "F", :f,
+  {
+    &((&1 - 32.0) * (5.0 / 9.0)),
+    &((&1 * (9.0 / 5.0)) + 32.0)
+  },
+  :c, "Temperature in Farhrenheit"
+```
+
