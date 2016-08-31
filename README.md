@@ -141,7 +141,7 @@ about the units you were using you can write:
 piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :knots
 ```
 
-However if you mistakenly write:
+If you mistakenly write:
 
 ```elixir
 piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :kg
@@ -149,7 +149,7 @@ piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> 
 
 you will get a dud result. However if you run Dialyzer (the
 [dialyxir](https://hex.pm/packages/dialyxir) mix plugin is easy to set up and
-use) you'll get a response similar to this:
+use) you'll get a warning similar to this:
 
 ```
 $ mix dialyzer
