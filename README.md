@@ -96,8 +96,8 @@ _>>> DefUnit does not provide run time type checking <<<_
 
 If you really want runtime type checking you should look at 
 [Unit Fun](https://hex.pm/packages/unit_fun). However if you're interested in
-using [Dialyzer](http://erlang.org/doc/man/dialyzer.html) with the type specs
-created by the DefUnit macros to do static analysis, read on.
+doing static analysis at compile time using [Dialyzer](http://erlang.org/doc/man/dialyzer.html) and the type specs
+created by the DefUnit macros, read on.
 
 #### Using Types
 
