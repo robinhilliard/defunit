@@ -42,10 +42,10 @@ defmodule DefUnit.Mixfile do
       licenses: ["Apache 2.0"],
       links: %{"GitHub" => "https://github.com/robinhilliard/defunit.git"},
       description: """
-      DefUnit provides a pair of macros that allow you to quickly create a module that
-      defines a set of core units (SI, FPS, currency, whatever) for its users to work with.
+      DefUnit provides macros that allow you to quickly create a module that
+      defines a set of core units (SI, FPS, currency, whatever) for its users.
       The macros create documentation attributes, conversion operators and type specs that allow
-      Dialyzer to detect most incompatible assignments at compile time.
+      Dialyzer to detect incompatible unit assignments at compile time.
       """
     ]
   end
