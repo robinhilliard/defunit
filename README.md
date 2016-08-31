@@ -43,8 +43,20 @@ defmodule Unit do
 end
 ```
 
-Note this isn't an SI vs Imperial units thing - kmh is an SI unit, but it's not the
-unit we're choosing to work in, which is metres per second.
+Note that core/other isn't an SI vs Imperial units thing - kmh is an SI unit,
+but it's not the velocity unit the developer has chosen to work in, which in this case
+is metres per second.
+
+DefUnit will create sensible `@doc` and `@typedoc` attributes. If you use 
+[Pandoc](http://pandoc.org) with ex_doc on your module by installing Pandoc and adding:
+ 
+```
+  config :ex_doc, :markdown_processor, ExDoc.Markdown.Pandoc
+```
+
+to your project's config.exs, unit symbols like `kgm^{-3}` will support 
+[LaTeX formatting](http://www.personal.ceu.hu/tex/math.htm#scripts) when your documentation
+is rendered.
 
 Now in iex:
 
@@ -92,7 +104,7 @@ You can read the above as 'convert 100 from kmh to mph'. But what is this?
 
 Apparently 100 kilograms is 224 miles per hour right? It is worth repeating:
 
-_>>> DefUnit does not provide run time type checking <<<_
+*>>> DefUnit does not provide run time type checking <<<*
 
 If you really want runtime type checking you should look at 
 [Unit Fun](https://hex.pm/packages/unit_fun). However if you're interested in
