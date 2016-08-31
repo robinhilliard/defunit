@@ -207,6 +207,6 @@ from/to conversion functions:
     &((&1 - 32.0) * (5.0 / 9.0)),
     &((&1 * (9.0 / 5.0)) + 32.0)
   },
-  :c, "Temperature in Farhrenheit"
+  :c, "Temperature in Fahrenheit"
 ```
 
