@@ -147,6 +147,30 @@ However if you mistakenly wrote:
 piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :kg
 ```
 
-nothing would happen unless you ran Dialyzer, perhaps using the 
-[dialyxir](https://hex.pm/packages/dialyxir) mix plugin, in which case you'd
+nothing will happen... unless you ran Dialyzer*, in which case you'd
 get this response:
+
+```
+$ mix dialyzer
+Starting Dialyzer
+...
+aero.ex:118: The call 'Elixir.Unit':'~>'(float(),'kg') will never return since
+the success typing is (number(),'feet' | 'feet2' | 'feet3' | 'gearth' | 'hours'
+| 'hp' | 'kmh' | 'knots' | 'l' | 'lbs' | 'min' | 'mph') -> float() and the
+contract is (w(),'hp') -> hp()
+    ; (ms2(),'gearth') -> gearth()
+    ; (s(),'hours') -> hours()
+    ; (s(),'min') -> min()
+    ; (ms(),'knots') -> knots()
+    ; (ms(),'mph') -> mph()
+    ; (ms(),'kmh') -> kmh()
+    ; (m3(),'l') -> l()
+    ; (m3(),'feet3') -> feet3()
+    ; (m2(),'feet2') -> feet2()
+    ; (kg(),'lbs') -> lbs()
+    ; (m(),'feet') -> feet()
+ done in 0m1.36s
+done (warnings were emitted)
+```
+
+\* Perhaps using the [dialyxir](https://hex.pm/packages/dialyxir) mix plugin
