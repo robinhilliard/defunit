@@ -76,7 +76,7 @@ seem arbitrary, but the idea is that the code using the Unit module is easier to
 write and reason about if it is working with a consistent set of core units of the 
 developer's choosing.
 
-The operators can also be used to convert between 'other' types in a readable way:
+The operators can also be chained to convert between 'other' types in a readable way:
 
 ```elixir
   iex> 100 <~ :kmh ~> :mph
