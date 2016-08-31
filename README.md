@@ -92,12 +92,12 @@ You can read the above as 'convert 100 from kmh to mph'. But what is this?
 
 Apparently 100 kilograms is 224 miles per hour right? It is worth repeating:
 
-_>>> Units does not provide run time type checking <<<_
+_>>> DefUnit does not provide run time type checking <<<_
 
 If you really want runtime type checking you should look at 
 [Unit Fun](https://hex.pm/packages/unit_fun). However if you're interested in
 using [Dialyzer](http://erlang.org/doc/man/dialyzer.html) with the type specs
-created by the Units macros to do static analysis, read on.
+created by the DefUnit macros to do static analysis, read on.
 
 #### Using Types
 
