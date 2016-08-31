@@ -43,8 +43,8 @@ defmodule DefUnit.Mixfile do
       links: %{"GitHub" => "https://github.com/robinhilliard/defunit.git"},
       description: """
       DefUnit provides a pair of macros that allow you to quickly create a module that
-      defines a set of core units for its users to work with. The macros
-      create documentation attributes, conversion operators and type specs that allow
+      defines a set of core units (SI, FPS, currency, whatever) for its users to work with.
+      The macros create documentation attributes, conversion operators and type specs that allow
       Dialyzer to detect most incompatible assignments at compile time.
       """
     ]
