@@ -1,19 +1,23 @@
 defmodule DefUnit do
   @moduledoc """
-  Macros used by modules declaring units
+  DefUnit defines macros used to create type specs and documentation
+  when working with a "core" set of measurement units, and also defines
+  operators to convert them to and from other units.
   
   ## Example
   ```
   
   use DefUnit
   
-  @doc_from_operator ~S"doc for <~ operator"
-  @doc_to_operator ~S"doc for ~> operator"
+  @doc_from_operator "documentation for <~ operator"
+  @doc_to_operator "documentation for ~> operator"
   
   # Units calculations are done in
   DefUnit.core  "m",        :m,     "SI length"
   DefUnit.core  "kg",       :kg,    "SI mass"
   DefUnit.core  "s",        :s,     "Time"
+  DefUnit.core  "C",        :c,     "Temperature in Celcius"
+  DefUnit.core  "ms^{-1}",  :ms,    "Metres per second"
 
   # Units we convert to and from above units
   DefUnit.other "feet",     :feet,    0.3048,   :m,   "FPS length and altitude"
@@ -47,16 +51,21 @@ defmodule DefUnit do
   
   
   @doc ~S"""
-  Does this work?
+  Define a 'core' unit.
+  
+  - `eq` is the short name for the unit used in the typedoc - basic tex formatting is supported
+  - `core_type` is the name used in the type spec for this unit
+  - `description` is the description used in the typedoc
+  
   """
-  defmacro core(eq, name, description) do
+  defmacro core(eq, core_type, description) do
     quote do
-      @core_units {unquote(eq), unquote(name)}
+      @core_units {unquote(eq), unquote(core_type)}
       @typedoc unquote(description <> " $" <> eq <> "$")
-      @type unquote({name, [], nil}) :: float
+      @type unquote({core_type, [], nil}) :: float
       @doc @doc_from_operator
-      @spec unquote({name, [], nil}) <~ unquote(name) :: unquote({name, [], nil})
-      def value <~ unquote(name) do
+      @spec unquote({core_type, [], nil}) <~ unquote(core_type) :: unquote({core_type, [], nil})
+      def value <~ unquote(core_type) do
         value
       end
     end
@@ -64,10 +73,17 @@ defmodule DefUnit do
   
   
   @doc """
+  Define an 'other' unit.
+  
+  - `eq` is the short name for the unit used in the typedoc - basic tex formatting is supported
+  - `other_type` is the name used in the type spec for this unit
+  - `ratio` is either a multiplier to convert this unit to the core unit, or a 2-tuple of from/to conversion functions
+  - `core_type` is the name of the corresponding core type
+  - `description` is the description used in the typedoc
   
   """
-  defmacro other(eq, name, ratio, core_type, description) do
-    name_string = Atom.to_string(name)
+  defmacro other(eq, other_type, ratio, core_type, description) do
+    name_string = Atom.to_string(other_type)
     core_type_string = Atom.to_string(core_type)
     to_ratio_name = String.to_atom(name_string <> "_to_" <> core_type_string)
     from_ratio_name = String.to_atom(core_type_string <> "_to_" <> name_string)
@@ -104,22 +120,22 @@ defmodule DefUnit do
       if length(for {_, ct} <- @core_units, ct == unquote(core_type), do: ct) == 0 do
         raise ArgumentError,
         message: """
-        Unit '#{unquote(name)}' refers to unknown core unit '#{unquote(core_type)}'
+        Unit '#{unquote(other_type)}' refers to unknown core unit '#{unquote(core_type)}'
         """
       end
        
-      @other_units {unquote(eq), unquote(name), unquote(core_type)}
+      @other_units {unquote(eq), unquote(other_type), unquote(core_type)}
       @typedoc unquote(description <> " $" <> eq <> "$")
-      @type unquote({name, [], nil}) :: float
+      @type unquote({other_type, [], nil}) :: float
       unquote(to_ratio)
       unquote(from_ratio)
-      @spec unquote({name, [], nil}) <~ unquote(name) :: unquote({core_type, [], nil})
-      def value <~ unquote(name) do
+      @spec unquote({other_type, [], nil}) <~ unquote(other_type) :: unquote({core_type, [], nil})
+      def value <~ unquote(other_type) do
         unquote(from_op)
       end
       @doc @doc_to_operator
-      @spec unquote({core_type, [], nil}) ~> unquote(name) :: unquote({name, [], nil})
-      def value ~> unquote(name) do
+      @spec unquote({core_type, [], nil}) ~> unquote(other_type) :: unquote({other_type, [], nil})
+      def value ~> unquote(other_type) do
         unquote(to_op)
       end
     end
