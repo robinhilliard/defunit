@@ -8,7 +8,8 @@ defmodule Units.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      elixirc_paths: elixirc_paths(Mix.env),
-     deps: deps()]
+     deps: deps(),
+     package: package()]
   end
   
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -32,5 +33,14 @@ defmodule Units.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:ex_doc, "~> 0.12", only: :dev}]
+  end
+  
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README", "LICENSE*"],
+      maintainers: ["Robin Hilliard"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/robinhilliard/units.git"}
+    ]
   end
 end
