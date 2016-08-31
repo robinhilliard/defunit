@@ -147,8 +147,9 @@ However if you mistakenly write:
 piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :kg
 ```
 
-nothing will happen... unless you run Dialyzer*, in which case you'll
-get a response similar to this:
+you will get a dud result. However if you run Dialyzer (the
+[dialyxir](https://hex.pm/packages/dialyxir) mix plugin is easy to set up and
+use) you'll get a response similar to this:
 
 ```
 $ mix dialyzer
@@ -164,5 +165,3 @@ contract is
  done in 0m1.36s
 done (warnings were emitted)
 ```
-
-\* Perhaps using the [dialyxir](https://hex.pm/packages/dialyxir) mix plugin
