@@ -44,8 +44,9 @@ end
 ```
 
 Note that core/other isn't an SI vs Imperial units thing - kmh is an SI unit,
-but it's not the velocity unit the developer has chosen to work in, which in this case
-is metres per second.
+but it's not the velocity unit the developer has chosen to work in (ms-1). You are free to 
+choose whatever units suit as your core set - FPS, currencies, or perhaps fully-laden-jumbo-jet
+ oil-rig emperor penguins if you're a Discovery Channel researcher.
 
 DefUnit will create sensible `@doc` and `@typedoc` attributes. If you use 
 [Pandoc](http://pandoc.org) with ex_doc on your module by installing Pandoc and adding:
@@ -108,8 +109,8 @@ Apparently 100 kilograms is 224 miles per hour right? It is worth repeating:
 
 If you really want runtime type checking you should look at 
 [Unit Fun](https://hex.pm/packages/unit_fun). However if you're interested in
-doing static analysis at compile time using [Dialyzer](http://erlang.org/doc/man/dialyzer.html) and the type specs
-created by the DefUnit macros, read on.
+doing static analysis at compile time using [Dialyzer](http://erlang.org/doc/man/dialyzer.html)
+and the type specs created by the DefUnit macros, read on.
 
 #### Using Types
 
@@ -162,7 +163,7 @@ piper_archer_stall_speed_kts = vs(1157 <~ :knots, 15.8 <~ :m2, 2.1, 0 <~ :feet) 
 or perhaps:
 
 ```elixir
-piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :kg
+piper_archer_stall_speed_kts = vs(1157 <~ :m2, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :kg
 ```
 
 you will get a dud result. However if you run Dialyzer (the
@@ -184,8 +185,8 @@ contract is
 done (warnings were emitted)
 ```
 
-[LYSE](http://learnyousomeerlang.com/dialyzer) has a good explanation of Dialyzer, its
-history, intent, and what the various warnings mean.
+Dialyzer can trace much more complex stuff than these examples - [LYSE](http://learnyousomeerlang.com/dialyzer)
+has a good explanation of Dialyzer, its history, intent, capabilities and what the various warnings mean.
 
 #### More About the Macros
 
