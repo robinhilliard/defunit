@@ -9,6 +9,8 @@ defmodule DefUnitExample do
   
   @doc_from_operator ~S"""
   Convert from other units to core units used for calculations.
+  If a core unit is specified do nothing, however Dialyzer can
+  still use this as a type hint.
   
   ## Example
   ```
@@ -24,6 +26,8 @@ defmodule DefUnitExample do
   26.8224
   iex> 100 <~ :kmh
   27.777
+  iex> 100 <~ :m
+  100
   iex> 0 <~ :f
   -17.77777777777778
   iex> 100 <~ :kmh ~> :mph
@@ -34,6 +38,8 @@ defmodule DefUnitExample do
 
   @doc_to_operator ~S"""
   Convert from core units used for calculations to other units.
+  If a core unit is specified do nothing, however Dialyzer can
+  still use this as a type hint.
   
   ## Example
   ```
@@ -49,6 +55,8 @@ defmodule DefUnitExample do
   22.369362920544024
   iex> 10 ~> :kmh
   36.00100802822479
+  iex> 10 ~> :m
+  10
   iex>-17.77777777777778 ~> :f
   0.0
   iex> 100 <~ :kmh ~> :mph
