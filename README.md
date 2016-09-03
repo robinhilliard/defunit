@@ -59,7 +59,7 @@ to your project's config.exs, unit symbols like `kgm^{-3}` will support
 [LaTeX formatting](http://www.personal.ceu.hu/tex/math.htm#scripts) when your documentation
 is rendered.
 
-Now in iex you can try the conversion operators `<~` and '~>':
+Now in iex you can try the conversion operators `<~` and `~>`:
 
 ```elixir
   iex>import Unit
