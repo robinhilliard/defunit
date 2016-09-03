@@ -197,8 +197,8 @@ In case you need direct access to the conversion factors you specified in `DefUn
 a pair of module attributes:
 
 ```elixir
-@feet_to_metres 0.3048
-@metres_to_feet 3.280839895
+@feet_to_m 0.3048
+@m_to_feet 3.280839895
 ```
 
 If your conversion between units is more complex (e.g. Farhrenheit to Celcius or live currency
