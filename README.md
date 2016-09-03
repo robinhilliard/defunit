@@ -45,8 +45,8 @@ end
 
 Note that core/other isn't an SI vs Imperial units thing - kmh is an SI unit,
 but it's not the velocity unit the developer has chosen to work in (ms-1). You are free to 
-choose whatever units suit as your core set - FPS, currencies, or perhaps fully-laden-jumbo-jet
- oil-rig emperor penguins if you're a Discovery Channel researcher.
+choose whatever units suit as your core set - foot/pound/seconds, currencies, or perhaps 
+fully-laden-jumbo-jet/oil-rig/emperor-penguins if you're a Discovery Channel researcher.
 
 DefUnit will create sensible `@doc` and `@typedoc` attributes. If you use 
 [Pandoc](http://pandoc.org) with ex_doc on your module by installing Pandoc and adding:
