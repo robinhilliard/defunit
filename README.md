@@ -59,7 +59,7 @@ to your project's config.exs, unit symbols like `kgm^{-3}` will support
 [LaTeX formatting](http://www.personal.ceu.hu/tex/math.htm#scripts) when your documentation
 is rendered.
 
-Now in iex:
+Now in iex you can try the conversion operators `<~` and '~>':
 
 ```elixir
   iex>import Unit
@@ -83,7 +83,7 @@ example metres per second. Conversely:
   36.00100802822479
 ```
 
-The values are assumed to be in 'core' representation and are converted to their
+takes values which are assumed to be in 'core' representation and converts them to their
 corresponding 'other' unit. The idea of separating units into 'core' and 'other' may
 seem arbitrary, but the idea is that the code using the Unit module is easier to
 write and reason about if it is working with a consistent set of core units of the 
