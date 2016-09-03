@@ -147,8 +147,8 @@ end
 ```
 
 The units defined in the Unit module are available to use in specs for our
-aerodynamics functions. If you were calling your library and wanted to be clear
-about the units you were using you can write:
+aerodynamics functions (you could also use the macros directly in the Aero module). If you were 
+calling your library and wanted to be clear about the units you were using you can write:
 
 ```elixir
 piper_archer_stall_speed_kts = vs(1157 <~ :kg, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> :knots
@@ -197,6 +197,14 @@ If your 'other' unit refers to an undefined 'core' unit you will get a compile e
 ** (ArgumentError) Unit 'kmh' refers to unknown core unit 'speeding_bullet'
 ```
 
+In case you need direct access to the conversion factors you specified in `DefUnit.other`, the macro creates
+a pair of module attributes:
+
+```elixir
+@feet_to_metres 0.3048
+@metres_to_feet 3.280839895
+```
+
 If your conversion between units is more complex (e.g. Farhrenheit to Celcius or live currency
 exchange rates) you can replace the conversion ratio in the other macro with a 2-tuple of 
 from/to conversion functions:
@@ -210,4 +218,3 @@ from/to conversion functions:
   },
   :c, "Temperature in Fahrenheit"
 ```
-
