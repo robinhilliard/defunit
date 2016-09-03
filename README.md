@@ -83,6 +83,8 @@ example metres per second. The last value is already in metre seconds. Conversel
   22.369362920544024
   iex> 10 ~> :kmh
   36.00100802822479
+  iex> 10 ~> :ms
+  10
 ```
 
 takes values which are assumed to be in 'core' representation and converts them to their
