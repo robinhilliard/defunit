@@ -53,7 +53,7 @@ defmodule DefUnit do
   @doc ~S"""
   Define a 'core' unit.
   
-  - `eq` is the short name for the unit used in the typedoc - basic tex formatting is supported
+  - `eq` is the short name for the unit used in the typedoc - basic LaTeX formatting is supported
   - `core_type` is the name used in the type spec for this unit
   - `description` is the description used in the typedoc
   
@@ -75,7 +75,7 @@ defmodule DefUnit do
   @doc """
   Define an 'other' unit.
   
-  - `eq` is the short name for the unit used in the typedoc - basic tex formatting is supported
+  - `eq` is the short name for the unit used in the typedoc - basic LaTeX formatting is supported
   - `other_type` is the name used in the type spec for this unit
   - `ratio` is either a multiplier to convert this unit to the core unit, or a 2-tuple of from/to conversion functions
   - `core_type` is the name of the corresponding core type
