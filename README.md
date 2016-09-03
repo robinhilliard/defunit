@@ -69,10 +69,12 @@ Now in iex you can try the conversion operators `<~` and `~>`:
   26.8224
   iex> 100 <~ :kmh
   27.777
+  iex> 100 <~ :ms
+  100
 ```
 
-All these values are converted to their equivalent 'core' representation, in this
-example metres per second. Conversely:
+The first three values are converted to their equivalent 'core' representation, in this
+example metres per second. The last value is already in metre seconds. Conversely:
 
 ```elixir  
   iex> 33.43886 ~> :knots
