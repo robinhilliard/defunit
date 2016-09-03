@@ -68,6 +68,11 @@ defmodule DefUnit do
       def value <~ unquote(core_type) do
         value
       end
+      @doc @doc_to_operator
+      @spec unquote({core_type, [], nil}) ~> unquote(core_type) :: unquote({core_type, [], nil})
+      def value ~> unquote(core_type) do
+        value
+      end
     end
   end
   
@@ -133,7 +138,6 @@ defmodule DefUnit do
       def value <~ unquote(other_type) do
         unquote(from_op)
       end
-      @doc @doc_to_operator
       @spec unquote({core_type, [], nil}) ~> unquote(other_type) :: unquote({other_type, [], nil})
       def value ~> unquote(other_type) do
         unquote(to_op)
