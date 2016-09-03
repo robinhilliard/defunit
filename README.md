@@ -43,9 +43,9 @@ defmodule Unit do
 end
 ```
 
-Note that core/other isn't an SI vs Imperial units thing - kmh is an SI unit,
-but it's not the velocity unit the developer has chosen to work in (ms-1). You are free to 
-choose whatever units suit as your core set - foot/pound/seconds, currencies, or perhaps 
+The idea of core/other is that the code using this module is easier to
+write and reason about if calculations are carried out in a consistent set of 'core' units.
+Your core units can be whatever suit your purpose - foot/pound/seconds, currencies, or perhaps 
 fully-laden-jumbo-jet/oil-rig/emperor-penguins if you're a Discovery Channel researcher.
 
 DefUnit will create sensible `@doc` and `@typedoc` attributes. If you use 
@@ -84,12 +84,8 @@ example metres per second. Conversely:
 ```
 
 takes values which are assumed to be in 'core' representation and converts them to their
-corresponding 'other' unit. The idea of separating units into 'core' and 'other' may
-seem arbitrary, but the idea is that the code using the Unit module is easier to
-write and reason about if it is working with a consistent set of core units of the 
-developer's choosing.
-
-The operators can also be chained to convert between 'other' types in a readable way:
+corresponding 'other' unit. The operators can also be chained to convert between 'other'
+types in a readable way:
 
 ```elixir
   iex> 100 <~ :kmh ~> :mph
@@ -103,9 +99,9 @@ You can read the above as 'convert 100 from kmh to mph'. But what is this?
   223.69362920544023
 ```
 
-Apparently 100 kilograms is 224 miles per hour right? It is worth repeating:
+Apparently 100 kilograms is 224 miles per hour right? It is worth emphasising at this point:
 
-*>>> DefUnit does not provide run time type checking <<<*
+*DefUnit does not provide run time type checking*
 
 If you really want runtime type checking you should look at 
 [Unit Fun](https://hex.pm/packages/unit_fun). However if you're interested in
