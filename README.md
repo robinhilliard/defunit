@@ -17,7 +17,7 @@ defmodule Unit do
 
   use DefUnit
   
-   @doc_to_operator "to SI"
+  @doc_to_operator "to SI"
   @doc_from_operator "from SI"
   
   # Units calculations are done in
