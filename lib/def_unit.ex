@@ -9,15 +9,19 @@ defmodule DefUnit do
   
   use DefUnit
   
-  @doc_from_operator "documentation for <~ operator"
-  @doc_to_operator "documentation for ~> operator"
+  @doc_to_operator "to SI"
+  @doc_from_operator "from SI"
   
   # Units calculations are done in
   DefUnit.core  "m",                :m,     "SI length"
+  DefUnit.core  "m2",               :m2,    "SI area"
   DefUnit.core  "kg",               :kg,    "SI mass"
+  DefUnit.core  "kgm<sup>3</sup>",  :kgm3,  "SI density"
   DefUnit.core  "s",                :s,     "Time"
   DefUnit.core  "C",                :c,     "Temperature in Celcius"
-  DefUnit.core  "ms<sup>-1</sup>",  :ms,    "Metres per second"
+  DefUnit.core  "ms<sup>-1</sup>",  :ms,    "SI Velocity"
+  DefUnit.core  "ms<sup>-2</sup>",  :ms2,   "SI Acceleration"
+  DefUnit.core  "Nm<sup>2</sup>",   :nm2,   "SI Pressure"
 
   # Units we convert to and from above units
   DefUnit.other "feet",     :feet,    0.3048,   :m,   "FPS length and altitude"
