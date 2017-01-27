@@ -17,28 +17,25 @@ defmodule Unit do
 
   use DefUnit
   
-  @doc_from_operator """
-  Convert from other units to core units used for calculations.
-  """
-
-  @doc_to_operator """
-  Convert from core units used for calculations to other units.
-  """
+   @doc_to_operator "to SI"
+  @doc_from_operator "from SI"
   
-  # Units we do our calculations in
-  DefUnit.core  "m",        :m,     "SI length"
-  DefUnit.core  "kg",       :kg,    "SI mass"
-  DefUnit.core  "s",        :s,     "Time"
-  DefUnit.core  "m^2",      :m2,    "SI area"
-  DefUnit.core  "ms^{-1}",  :ms,    "SI velocity"
-  DefUnit.core  "ms^{-2}",  :ms2,   "SI acceleration"
-  DefUnit.core  "kgm^{-3}", :kgm3,  "SI density"
+  # Units calculations are done in
+  DefUnit.core  "m",                :m,     "SI length"
+  DefUnit.core  "m2",               :m2,    "SI area"
+  DefUnit.core  "kg",               :kg,    "SI mass"
+  DefUnit.core  "kgm<sup>3</sup>",  :kgm3,  "SI density"
+  DefUnit.core  "s",                :s,     "Time"
+  DefUnit.core  "C",                :c,     "Temperature in Celcius"
+  DefUnit.core  "ms<sup>-1</sup>",  :ms,    "SI Velocity"
+  DefUnit.core  "ms<sup>-2</sup>",  :ms2,   "SI Acceleration"
+  DefUnit.core  "Nm<sup>2</sup>",   :nm2,   "SI Pressure"
   
   # Units we convert to and from core units
-  DefUnit.other "feet",     :feet,    0.3048,   :m,   "FPS length and altitude"
-  DefUnit.other "kmh^{-1}", :kmh,     0.27777,  :ms,  "Kilometres per hour"
-  DefUnit.other "mph",      :mph,     0.44704,  :ms,  "Imperial velocity"
-  DefUnit.other "knots",    :knots,   0.514444, :ms,  "Nautical miles per hour"
+  DefUnit.other "feet",             :feet,    0.3048,   :m,   "FPS length and altitude"
+  DefUnit.other "kmh<sup>-1</sup>", :kmh,     0.27777,  :ms,  "Kilometres per hour"
+  DefUnit.other "mph",              :mph,     0.44704,  :ms,  "Imperial velocity"
+  DefUnit.other "knots",            :knots,   0.514444, :ms,  "Nautical miles per hour"
 
 end
 ```
@@ -46,18 +43,7 @@ end
 The idea of core/other is that the code using this module is easier to
 write and reason about if calculations are carried out in a consistent set of 'core' units.
 Your core units can be whatever suit your purpose - foot/pound/seconds, currencies, or perhaps 
-fully-laden-jumbo-jet/oil-rig/emperor-penguins if you're a Discovery Channel researcher.
-
-DefUnit will create sensible `@doc` and `@typedoc` attributes. If you use 
-[Pandoc](http://pandoc.org) with ex_doc on your module by installing Pandoc and adding:
- 
-```
-  config :ex_doc, :markdown_processor, ExDoc.Markdown.Pandoc
-```
-
-to your project's config.exs, unit symbols like `kgm^{-3}` will support 
-[LaTeX formatting](http://www.personal.ceu.hu/tex/math.htm#scripts) when your documentation
-is rendered.
+fully-laden-jumbo-jet/oil-rig/emperor-penguins if you're a Discovery Channel researcher. DefUnit will create sensible `@doc` and `@typedoc` attributes.
 
 Now in iex you can try the conversion operators `<~` and `~>`:
 
@@ -168,25 +154,32 @@ piper_archer_stall_speed_kts = vs(1157 <~ :m2, 15.8 <~ :m2, 2.1, 0 <~ :feet) ~> 
 
 you will get a dud result. However if you run Dialyzer (the
 [dialyxir](https://hex.pm/packages/dialyxir) mix plugin is easy to set up and
-use) you'll get warnings similar to this:
+use) on the last example above you'll get a warning similar to this:
 
 ```
 $ mix dialyzer
-Starting Dialyzer
-...stuff ommitted
-aero.ex:118: The call 'Elixir.Unit':'~>'(float(),'kg') will never return since
-the success typing is (number(),'feet' | 'kmh' | 'knots') -> float() and the
-contract is 
-    ; (ms(),'knots') -> knots()
-    ; (ms(),'mph') -> mph()
-    ; (ms(),'kmh') -> kmh()
-    ; (m(),'feet') -> feet()
- done in 0m1.36s
+... stuff omitted
+aero.ex:144: The call 'Elixir.Aero':'<~'(1157,'m2') breaks the contract (f(),'f') -> c()
+    ; (lbs(),'lbs') -> kg()
+    ; (feet(),'feet') -> m()
+    ; (nm2(),'nm2') -> nm2()
+    ; (ms2(),'ms2') -> ms2()
+    ; (ms(),'ms') -> ms()
+    ; (c(),'c') -> c()
+    ; (s(),'s') -> s()
+    ; (kgm3(),'kgm3') -> kgm3()
+    ; (kg(),'kg') -> kg()
+    ; (m2(),'m2') -> m2()
+    ; (m(),'m') -> m() in the 1st argument
+ done in 0m1.44s
 done (warnings were emitted)
 ```
 
-Dialyzer can trace much more complex stuff than these examples - [LYSE](http://learnyousomeerlang.com/dialyzer)
-has a good explanation of Dialyzer, its history, intent, capabilities and what the various warnings mean.
+This is saying that there's no way a measurement of area in m<sup>2</sup> can become
+the expected measurement of weight in the first argument of `vs()`. Dialyzer can trace much more 
+complex stuff than these examples - [LYSE](http://learnyousomeerlang.com/dialyzer)
+has a good explanation of Dialyzer, its history, intent, capabilities and what the various
+warnings mean.
 
 #### More About the Macros
 
