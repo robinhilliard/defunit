@@ -16,7 +16,7 @@ defmodule DefUnit do
   DefUnit.core  "m",                :m,     "SI length"
   DefUnit.core  "m2",               :m2,    "SI area"
   DefUnit.core  "kg",               :kg,    "SI mass"
-  DefUnit.core  "kgm<sup>3</sup>",  :kgm3,  "SI density"
+  DefUnit.core  "kgm<sup>-3</sup>", :kgm3,  "SI density"
   DefUnit.core  "s",                :s,     "Time"
   DefUnit.core  "C",                :c,     "Temperature in Celcius"
   DefUnit.core  "ms<sup>-1</sup>",  :ms,    "SI Velocity"
@@ -68,7 +68,7 @@ defmodule DefUnit do
       @typedoc unquote(description <> " " <> eq)
       @type unquote({core_type, [], nil}) :: float
       @doc @doc_from_operator
-      @spec unquote({core_type, [], nil}) <~ unquote(core_type) :: unquote({core_type, [], nil})
+      @spec number <~ unquote(core_type) :: unquote({core_type, [], nil})
       def value <~ unquote(core_type) do
         value
       end
@@ -138,7 +138,7 @@ defmodule DefUnit do
       @type unquote({other_type, [], nil}) :: float
       unquote(to_ratio)
       unquote(from_ratio)
-      @spec unquote({other_type, [], nil}) <~ unquote(other_type) :: unquote({core_type, [], nil})
+      @spec number <~ unquote(other_type) :: unquote({core_type, [], nil})
       def value <~ unquote(other_type) do
         unquote(from_op)
       end

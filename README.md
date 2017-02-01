@@ -24,12 +24,12 @@ defmodule Unit do
   DefUnit.core  "m",                :m,     "SI length"
   DefUnit.core  "m2",               :m2,    "SI area"
   DefUnit.core  "kg",               :kg,    "SI mass"
-  DefUnit.core  "kgm<sup>3</sup>",  :kgm3,  "SI density"
+  DefUnit.core  "kgm<sup>-3</sup>", :kgm3,  "SI density"
   DefUnit.core  "s",                :s,     "Time"
   DefUnit.core  "C",                :c,     "Temperature in Celcius"
   DefUnit.core  "ms<sup>-1</sup>",  :ms,    "SI Velocity"
   DefUnit.core  "ms<sup>-2</sup>",  :ms2,   "SI Acceleration"
-  DefUnit.core  "Nm<sup>2</sup>",   :nm2,   "SI Pressure"
+  DefUnit.core  "Nm<sup>-2</sup>",  :nm2,   "SI Pressure"
   
   # Units we convert to and from core units
   DefUnit.other "feet",             :feet,    0.3048,   :m,   "FPS length and altitude"
@@ -108,7 +108,7 @@ from FPS, navigation and SI unit systems, and you really don't want to mess up y
 defmodule Aero do
 
   @doc "pressure in standard atmosphere at `alt` feet"
-  @spec p(Unit.feet) :: Unit.kgm3
+  @spec p(Unit.feet) :: Unit.nm2
   def p(alt) do
     8.0e-19 * :math.pow(alt, 4)  \
     - 4.0e-14 * :math.pow(alt, 3) \
